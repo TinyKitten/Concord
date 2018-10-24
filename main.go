@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 	"os"
+	"strconv"
+	"time"
 
 	"github.com/TinyKitten/Concord/discord"
 	"github.com/joho/godotenv"
@@ -33,6 +35,14 @@ func main() {
 		if err != nil {
 			log.Fatalf("An error occurred during processing %s: %s", key, err.Error())
 		}
-		log.Printf("Uploaded: %s", key)
+
+		log.Printf("Uploaded: %s\n", key)
+
+		ms, err := strconv.ParseInt(os.Getenv("SLEEP_MS"), 10, 32)
+		if err != nil {
+			log.Fatalf("An error occurred during processing %s: %s", key, err.Error())
+		}
+		time.Sleep(time.Duration(ms) * time.Millisecond)
+		log.Printf("Sleeping %dms", ms)
 	}
 }
