@@ -31,7 +31,8 @@ func main() {
 	for key, url := range emojis {
 		err = d.TransferEmoji(gID, key, url)
 		if err != nil {
-			log.Fatal(err)
+			log.Fatalf("An error occurred during processing %s: %s", key, err.Error())
 		}
+		log.Printf("Uploaded: %s", key)
 	}
 }
